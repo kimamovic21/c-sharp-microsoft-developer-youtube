@@ -1,29 +1,32 @@
 ﻿using System;
 
-namespace HelloWorld
+namespace Decisions
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //int x;
-            //int y;
+            Console.WriteLine("Bob's Big Giveaway");
+            Console.Write("Choose a door: 1, 2, or 3: ");
 
-            //x = 7;
-            //y = x + 3;
-            //Console.WriteLine(y);
+            string userValue = Console.ReadLine();
+            //string message = "";
 
-            Console.WriteLine("What is your name?");
+            //if (userValue == "1") message = "You won a new car!";
+            //else if (userValue == "2") message = "You won a new boat!";
+            //else if (userValue == "3") message = "You won a new cat!";
+            //else
+            //{
+            //    message = "Sorry, we didn't understand!";
+            //    message += "You Lose!";
+            //}
 
-            Console.Write("Type your first name: ");
-            string myFirstName;
-            myFirstName = Console.ReadLine();
+            //Console.WriteLine(message);
 
-            string myLastName;
-            Console.Write("Type your last name: ");
-            myLastName = Console.ReadLine();
-
-            Console.WriteLine("Hello, " + myFirstName + " " + myLastName);
+            string message = (userValue == "1") ? "boat" : "strand of lint";
+            //Console.WriteLine("You won a " + message + ".");
+            //Console.WriteLine("You won a: {0}. ", message;
+            Console.WriteLine("You entered: {0}, therefore you won a {1}.", userValue, message);
 
             Console.ReadLine();
         }
