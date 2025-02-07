@@ -1,33 +1,55 @@
 ﻿using System;
 
-namespace Decisions
+namespace OperatorsExpressionsStatements
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Bob's Big Giveaway");
-            Console.Write("Choose a door: 1, 2, or 3: ");
+            int x, y, a, b;
 
-            string userValue = Console.ReadLine();
-            //string message = "";
+            x = 3;
+            y = 2;
+            a = 1;
+            b = 0;
 
-            //if (userValue == "1") message = "You won a new car!";
-            //else if (userValue == "2") message = "You won a new boat!";
-            //else if (userValue == "3") message = "You won a new cat!";
-            //else
-            //{
-            //    message = "Sorry, we didn't understand!";
-            //    message += "You Lose!";
-            //}
+            x = 3 + 4;
+            x = 4 - 3;
+            x = 10 * 5;
+            x = 10 / 5;
+            x = (x + y) * (a - b);
 
-            //Console.WriteLine(message);
+            if (x == y)
+            {
+            }
 
-            string message = (userValue == "1") ? "boat" : "strand of lint";
-            //Console.WriteLine("You won a " + message + ".");
-            //Console.WriteLine("You won a: {0}. ", message;
-            Console.WriteLine("You entered: {0}, therefore you won a {1}.", userValue, message);
+            if (x > y)
+            {
+            }
 
+            if (x >= y)
+            {
+            }
+
+            if (x < y)
+            {
+            }
+
+            if (x <= y)
+            {
+            }
+
+            if ((x > y) && (a > b))
+            {
+            }
+
+            if ((x > y) || (a > b))
+            {
+            }
+
+            string message = (x == 1) ? "Car" : "Boat";
+
+            Console.WriteLine("Hello World!");
             Console.ReadLine();
         }
     }
