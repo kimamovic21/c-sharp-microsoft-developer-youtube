@@ -1,55 +1,26 @@
 ﻿using System;
 
-namespace OperatorsExpressionsStatements
+namespace ForIteration
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int x, y, a, b;
-
-            x = 3;
-            y = 2;
-            a = 1;
-            b = 0;
-
-            x = 3 + 4;
-            x = 4 - 3;
-            x = 10 * 5;
-            x = 10 / 5;
-            x = (x + y) * (a - b);
-
-            if (x == y)
+            for (int i = 0; i < 10; i++)
             {
+                Console.WriteLine(i);
+                if (i == 7)
+                {
+                    Console.WriteLine("Found seven!");
+                    break;
+                }
             }
 
-            if (x > y)
+            for (int myValue = 0; myValue < 12; myValue++)
             {
+                Console.WriteLine(myValue);
             }
 
-            if (x >= y)
-            {
-            }
-
-            if (x < y)
-            {
-            }
-
-            if (x <= y)
-            {
-            }
-
-            if ((x > y) && (a > b))
-            {
-            }
-
-            if ((x > y) || (a > b))
-            {
-            }
-
-            string message = (x == 1) ? "Car" : "Boat";
-
-            Console.WriteLine("Hello World!");
             Console.ReadLine();
         }
     }
