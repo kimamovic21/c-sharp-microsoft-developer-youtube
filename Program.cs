@@ -1,49 +1,43 @@
 ﻿using System;
 
-namespace UnderstandingArrays
+namespace SimpleMethods
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //int[] numbers = new int[5];
+            HelloWorld();
 
-            //numbers[0] = 4;
-            //numbers[1] = 8;
-            //numbers[2] = 15;
-            //numbers[3] = 16;
-            //numbers[4] = 23;
-            ////numbers[5] = 42;
+            Console.WriteLine("What is your first name?");
+            string firstName = Console.ReadLine();
 
-            //Console.WriteLine(numbers);
-            //Console.WriteLine(numbers[1]);
-            //Console.WriteLine(numbers.Length);
+            Console.WriteLine("What is your last name?");
+            string lastName = Console.ReadLine();
 
-            int[] numbers = new int[] { 4, 8, 15, 16, 23, 42 };
-            string[] names = new string[] { "Eddie", "Alex", "Michael", "David Lee" };
+            string reversedFirstName = ReverseString(firstName);
+            string reversedLastName = ReverseString(lastName);
 
-            //for (int i = 0; i < names.Length; i++)
-            //{
-            //    Console.WriteLine(names[i]);
-            //}
-
-            //foreach (string name in names)
-            //{
-            //    Console.WriteLine(name);
-            //}
-
-            string zig = 
-                "You can get what you want out of life " +
-                "if you help enough other people get what they want.";
-
-            char[] charArray = zig.ToCharArray();
-            Array.Reverse(charArray);
-
-            foreach (char zigChar in charArray) {
-                Console.Write(zigChar);
-            }
+            DisplayResult(reversedFirstName, reversedLastName);
 
             Console.ReadLine();
+        }
+
+        private static void HelloWorld()
+        {
+            Console.WriteLine("Hello World");
+        }
+
+        private static string ReverseString(string message)
+        {
+            char[] messageArray = message.ToCharArray();
+            Array.Reverse(messageArray);
+
+            return new string(messageArray);
+        }
+
+        private static void DisplayResult(string reversedFirstName, string reversedLastName)
+        {
+            Console.WriteLine($"Reversed Name: {reversedFirstName} {reversedLastName}");
         }
     }
 }
