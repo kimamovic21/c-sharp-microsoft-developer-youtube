@@ -1,85 +1,49 @@
 ﻿using System;
+using System.Text;
 
-namespace WhileIteration
+namespace WorkingWithStrings
 {
     class Program
     {
         static void Main(string[] args)
         {
-            bool displayMenu = true;
+            //string myString = "My \"so-called\" life";
+            //string myString = "What if I need a \nnew line?";
+            //string myString = "Go to your c:\\ drive";
+            //string myString = @"Go to your c:\ drive";
 
-            while (displayMenu)
+            //string myString = String.Format("{0} = {1}", "First", "Second");
+            //string myString = string.Format("{0:C}", 123.45);
+            //string myString = string.Format("{0:N}", 1234567890);
+            //string myString = string.Format("{0:P}", .123);
+            //string myString = string.Format("Phone Number: {0:(###) ###-####}", 1234567890);
+
+            //string myString = " That summer we took threes across the board ";
+            //myString = myString.Substring(6, 14);
+            //myString = myString.ToUpper();
+            //myString = myString.Replace(" ", "--");
+            //myString = myString.Remove(6, 14);
+            //myString = String.Format(
+            //    "Length before: {0} -- Length after: {1}", 
+            //    myString.Length, 
+            //    myString.Trim().Length
+            //);
+
+            //string myString = "";
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    myString += "--" + i.ToString();
+            //}
+
+            StringBuilder myString = new StringBuilder();
+
+            for (int i = 0; i < 100; i++)
             {
-                displayMenu = MainMenu();
+                myString.Append("--");
+                myString.Append(i);
             }
-        }
 
-        private static bool MainMenu()
-        {
-            Console.Clear();
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1) Print Numbers");
-            Console.WriteLine("2) Guessing Game");
-            Console.WriteLine("3) Exit");
-
-            string result = Console.ReadLine();
-            if (result == "1")
-            {
-                PrintNumbers();
-                return true;
-            }
-            else if (result == "2")
-            {
-                GuessingGame();
-                return true;
-            }
-            else if (result == "3")
-                return false;
-            else
-                return true;
-        }
-
-        private static void PrintNumbers()
-        {
-            Console.Clear();
-            Console.WriteLine("Print numbers");
-            Console.WriteLine("Type a number:");
-            int result = int.Parse(Console.ReadLine());
-            int counter = 1;
-            while (counter < result + 1)
-            {
-                Console.Write(counter);
-                Console.WriteLine("-");
-                counter++;
-            }
-            Console.ReadLine();
-        }
-
-        private static void GuessingGame()
-        {
-            Console.Clear();
-            Console.WriteLine("Guessing game");
-
-            Random myRandom = new Random();
-            int randomNumber = myRandom.Next(1, 11);
-
-            int guesses = 0;
-            bool incorrect = true;
-
-            do
-            {
-                Console.WriteLine("Guess a number between 1 and 10");
-                string result = Console.ReadLine();
-
-                guesses++;
-
-                if (result == randomNumber.ToString())
-                    incorrect = false;
-                else
-                    Console.WriteLine("Wrong!");
-            } while(incorrect);
-            Console.WriteLine("Correct! It took you {0} guesses.", guesses);
-
+            Console.WriteLine(myString);
             Console.ReadLine();
         }
     }
