@@ -1,77 +1,53 @@
 ﻿using System;
 
-namespace ObjectLifetime
+namespace UnderstandingScopes
 {
     class Program
     {
+        private static string k = "";
+
         static void Main(string[] args)
         {
-            //Car myCar = new Car();
-            //myCar.Make = "Chevrolet";
-            //myCar.Model = "Camaro";
-            //myCar.Year = 2018;
-            //myCar.Color = "Red";
-            //Console.WriteLine(myCar);
+            string j = "";
 
-            //Car myOtherCar;
-            //myOtherCar = myCar;
+            for (int i = 0; i < 10; i++)
+            {
+                j = i.ToString();
+                k = i.ToString();
+                Console.WriteLine(i);
 
-            //Console.WriteLine(
-            //    "{0} {1} {2} {3}",
-            //    myOtherCar.Make,
-            //    myOtherCar.Model,
-            //    myOtherCar.Year,
-            //    myOtherCar.Color
-            //);
+                if (i == 9)
+                {
+                    string l = i.ToString();
+                }
+                //Console.WriteLine(l);
+            }
+            //Console.WriteLine(i);
+            Console.WriteLine("Outside of the for loop: " + j);
+            Console.WriteLine("Outside of the for loop: " + k);
 
-            //myOtherCar.Make = "Chevy";
-            //myOtherCar.Model = "Corvette";
-            //myOtherCar.Year = 2019;
-            //myOtherCar.Color = "Blue";
+            HelperMethod();
 
-            //myOtherCar = null;
-
-            //Console.WriteLine(
-            //   "{0} {1} {2} {3}",
-            //   myOtherCar.Make,
-            //   myOtherCar.Model,
-            //   myOtherCar.Year,
-            //   myOtherCar.Color
-            //);
-
-            Car myThirdCar = new Car("Ford", "Escape", 2005, "white");
-            Console.Write(myThirdCar);
+            Car myCar = new Car();
+            myCar.DoSomething();
 
             Console.ReadLine();
+        }
+        static void HelperMethod()
+        {
+            Console.WriteLine("Value of k from the HelperMethod(): " + k);
         }
     }
 
     class Car
     {
-        public string Make { get; set; }
-        public string Model { get; set; }
-        public int Year { get; set; }
-        public string Color { get; set; }
-
-        //public Car()
-        //{
-        //    Make = "Nissan";
-        //    Model = "Altima";
-        //    Year = 2018;
-        //    Color = "Black";
-        //}
-
-        public Car(string make, string model, int year, string color)
+        public void DoSomething()
         {
-            Make = make;
-            Model = model;
-            Year = year;
-            Color = color;
+            Console.WriteLine(helperMethod());
         }
-
-        public override string ToString()
+        private string helperMethod()
         {
-            return $"{Year} {Make} {Model} {Color}";
+            return "Hello World!";
         }
     }
 }
