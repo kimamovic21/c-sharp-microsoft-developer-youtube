@@ -1,53 +1,20 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 
-namespace UnderstandingScopes
+namespace AssembliesAndNamespaces
 {
     class Program
     {
-        private static string k = "";
-
         static void Main(string[] args)
         {
-            string j = "";
+            WebClient client = new WebClient();
+            string reply = client.DownloadString("https://msdn.microsoft.com");
 
-            for (int i = 0; i < 10; i++)
-            {
-                j = i.ToString();
-                k = i.ToString();
-                Console.WriteLine(i);
-
-                if (i == 9)
-                {
-                    string l = i.ToString();
-                }
-                //Console.WriteLine(l);
-            }
-            //Console.WriteLine(i);
-            Console.WriteLine("Outside of the for loop: " + j);
-            Console.WriteLine("Outside of the for loop: " + k);
-
-            HelperMethod();
-
-            Car myCar = new Car();
-            myCar.DoSomething();
+            Console.WriteLine(reply);
+            File.WriteAllText(@"C:\Lesson17\WriteText.txt", reply);
 
             Console.ReadLine();
-        }
-        static void HelperMethod()
-        {
-            Console.WriteLine("Value of k from the HelperMethod(): " + k);
-        }
-    }
-
-    class Car
-    {
-        public void DoSomething()
-        {
-            Console.WriteLine(helperMethod());
-        }
-        private string helperMethod()
-        {
-            return "Hello World!";
         }
     }
 }
