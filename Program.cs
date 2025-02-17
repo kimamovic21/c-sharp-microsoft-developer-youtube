@@ -3,105 +3,73 @@ using System.IO;
 using System.Net;
 using System.Collections;
 
-namespace WorkingWithLINQ
+namespace EnumsAndSwitch
 {
     class Program
     {
         static void Main(string[] args)
         {
-            List<Car> myCars = new List<Car>()
+            List<Todo> todos = new List<Todo>()
             {
-                new Car { Make = "Toyota", Model = "Camry", VIN = "A1", StickerPrice = 25000, Year = 1982 },  
-                new Car { Make = "Nissan", Model = "Altima", VIN = "B2", StickerPrice = 22000, Year = 1993 }, 
-                new Car { Make = "BMW", Model = "750li", VIN = "C3", StickerPrice = 70000, Year = 1987 },
-                new Car { Make = "BMW", Model = "55i", VIN = "D4", StickerPrice = 55000, Year = 2004 },  
-                new Car { Make = "Toyota", Model = "4Runner", VIN = "E5", StickerPrice = 35000, Year = 1984 },
-                new Car { Make = "Ford", Model = "Escape", VIN = "F6", StickerPrice = 30000, Year = 2000 },
+                new Todo { Description = "Task 1", EstimatedHours = 6, Status = Status.Completed },
+                new Todo { Description = "Task 2", EstimatedHours = 2, Status = Status.InProgress },
+                new Todo { Description = "Task 3", EstimatedHours = 8, Status = Status.NotStarted },
+                new Todo { Description = "Task 4", EstimatedHours = 12, Status = Status.Deleted },
+                new Todo { Description = "Task 5", EstimatedHours = 6, Status = Status.OnHold },
+                new Todo { Description = "Task 6", EstimatedHours = 2, Status = Status.Completed },
+                new Todo { Description = "Task 7", EstimatedHours = 14, Status = Status.NotStarted },
+                new Todo { Description = "Task 8", EstimatedHours = 8, Status = Status.Completed },
+                new Todo { Description = "Task 9", EstimatedHours = 8, Status = Status.InProgress },
+                new Todo { Description = "Task 10", EstimatedHours = 4, Status = Status.Completed },
             };
 
-            //var bmws = from car in myCars
-            //           where car.Make == "BMW"
-            //           && car.Year == 2004
-            //           select car;
-
-            //foreach (var car in bmws)
-            //{
-            //    Console.WriteLine("{0} {1}", car.Model, car.VIN);
-            //}
-
-
-            //var bmws2 = myCars.Where(p => p.Make == "BMW" && p.Year == 2004);
-
-            //foreach (var car in bmws2)
-            //{
-            //    Console.WriteLine("{0} {1}", car.Model, car.VIN);
-            //}
-
-
-            //var orderedCars = from car in myCars
-            //                  orderby car.Year descending
-            //                  select car;
-
-            //foreach (var car in orderedCars)
-            //{
-            //    Console.WriteLine("{0} {1}", car.Year, car.Model, car.VIN);
-            //}
-
-
-            //var orderedCars = myCars.OrderByDescending(p => p.Year);
-
-            //foreach (var car in orderedCars)
-            //{
-            //    Console.WriteLine("{0} {1}", car.Year, car.Model, car.VIN);
-            //}
-
-
-            //var firstBMW = myCars
-            //    .OrderByDescending(p => p.Year)
-            //    .First(p => p.Make == "BMW");
-            //Console.WriteLine(firstBMW.VIN);
-
-
-            //Console.WriteLine(myCars.TrueForAll(p => p.Year > 2000));
-
-
-            //myCars.ForEach(p => p.StickerPrice -= 3000);
-            //myCars.ForEach(p => Console.WriteLine("{0} {1:C}", p.VIN, p.StickerPrice));
-
-
-            //Console.WriteLine(myCars.Exists(p => p.Model == "750li"));
-
-
-            //Console.WriteLine(myCars.Sum(p => p.StickerPrice));
-
-
-            //Console.WriteLine(myCars.GetType());
-
-
-            //var orderedCars = myCars.OrderByDescending(p => p.Year);
-            //Console.WriteLine(orderedCars.GetType());
-
-
-            //var bmws = myCars.Where(p => p.Make == "BMW" && p.Year == 2004);
-            //Console.WriteLine(bmws.GetType());
-
-
-            //var newCars = from car in myCars
-            //              where car.Make == "BMW"
-            //              && car.Year == 2004
-            //              select new { car.Make, car.Model };
-            //Console.WriteLine(newCars.GetType());
+            PrintAssessment(todos);
 
             Console.ReadLine();
         }
+
+        private static void PrintAssessment(List<Todo> todos)
+        {
+            foreach (var todo in todos)
+            {
+                switch (todo.Status)
+                {
+                    case Status.NotStarted:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        break;
+                    case Status.InProgress:
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        break;
+                    case Status.OnHold:
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        break;
+                    case Status.Completed:
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        break;
+                    case Status.Deleted:
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        break;
+                    default:
+                        break;
+                }
+                Console.WriteLine(todo.Description);
+            }
+        }
     }
 
-    class Car
+    class Todo
     {
-        public string VIN { get; set; }
-        public string Make { get; set; }
-        public string Model { get; set; }
-        public int Year { get; set; }
-        public double StickerPrice { get; set; }
+        public string Description { get; set; }
+        public int EstimatedHours { get; set; }
+        public Status Status { get; set; }
+    }
+
+    enum Status
+    {
+        NotStarted,
+        InProgress,
+        OnHold,
+        Completed,
+        Deleted
     }
 }
