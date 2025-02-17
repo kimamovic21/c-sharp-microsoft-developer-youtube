@@ -2,46 +2,39 @@
 using System.IO; 
 using System.Net;
 using System.Collections;
+using System.Timers;
 
-namespace HandlingExceptions
+namespace TimerExample
 {
     class Program
     {
         static void Main(string[] args)
         {
-            try
-            {
-                string content = File.ReadAllText(@"C:\MyFiles\test-file.txt");
-                //string content = File.ReadAllText(@"C:\MyFile\test.txt");
-                //string content = File.ReadAllText(@"C:\MyFiles\test.txt");
+            System.Timers.Timer myTimer = new System.Timers.Timer(1000);
 
-                Console.WriteLine(content);
-                Console.ReadLine();
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("There was a problem");
-                Console.WriteLine("Make sure the name of the file is named correctly: test-file.txt");
-            }
-            catch (DirectoryNotFoundException)
-            {
-                Console.WriteLine("There was a problem");
-                Console.WriteLine(@"Make sure the name of the directory C:\MyFiles exists");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("There was a problem!");
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                // Code to finalize
-                // Setting objects to null
-                // Closing database connections
-                Console.WriteLine("Closing application now...");
-            }
+            myTimer.Elapsed += MyTimer_Elapsed;
+            myTimer.Elapsed += MyTimer_Elapsed1;
+
+            myTimer.Start();
+
+            Console.WriteLine("Press enter to remove the red event");
+            Console.ReadLine();
+
+            myTimer.Elapsed -= MyTimer_Elapsed1;
 
             Console.ReadLine();
+        }
+
+        private static void MyTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Elapsed: {0:HH:mm:ss.fff}", e.SignalTime);
+        }
+
+        private static void MyTimer_Elapsed1(object sender, ElapsedEventArgs e)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Elapsed: {0:HH:mm:ss.fff}", e.SignalTime);
         }
     }
 }
