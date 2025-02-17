@@ -3,73 +3,45 @@ using System.IO;
 using System.Net;
 using System.Collections;
 
-namespace EnumsAndSwitch
+namespace HandlingExceptions
 {
     class Program
     {
         static void Main(string[] args)
         {
-            List<Todo> todos = new List<Todo>()
+            try
             {
-                new Todo { Description = "Task 1", EstimatedHours = 6, Status = Status.Completed },
-                new Todo { Description = "Task 2", EstimatedHours = 2, Status = Status.InProgress },
-                new Todo { Description = "Task 3", EstimatedHours = 8, Status = Status.NotStarted },
-                new Todo { Description = "Task 4", EstimatedHours = 12, Status = Status.Deleted },
-                new Todo { Description = "Task 5", EstimatedHours = 6, Status = Status.OnHold },
-                new Todo { Description = "Task 6", EstimatedHours = 2, Status = Status.Completed },
-                new Todo { Description = "Task 7", EstimatedHours = 14, Status = Status.NotStarted },
-                new Todo { Description = "Task 8", EstimatedHours = 8, Status = Status.Completed },
-                new Todo { Description = "Task 9", EstimatedHours = 8, Status = Status.InProgress },
-                new Todo { Description = "Task 10", EstimatedHours = 4, Status = Status.Completed },
-            };
+                string content = File.ReadAllText(@"C:\MyFiles\test-file.txt");
+                //string content = File.ReadAllText(@"C:\MyFile\test.txt");
+                //string content = File.ReadAllText(@"C:\MyFiles\test.txt");
 
-            PrintAssessment(todos);
+                Console.WriteLine(content);
+                Console.ReadLine();
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("There was a problem");
+                Console.WriteLine("Make sure the name of the file is named correctly: test-file.txt");
+            }
+            catch (DirectoryNotFoundException)
+            {
+                Console.WriteLine("There was a problem");
+                Console.WriteLine(@"Make sure the name of the directory C:\MyFiles exists");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("There was a problem!");
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                // Code to finalize
+                // Setting objects to null
+                // Closing database connections
+                Console.WriteLine("Closing application now...");
+            }
 
             Console.ReadLine();
         }
-
-        private static void PrintAssessment(List<Todo> todos)
-        {
-            foreach (var todo in todos)
-            {
-                switch (todo.Status)
-                {
-                    case Status.NotStarted:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        break;
-                    case Status.InProgress:
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        break;
-                    case Status.OnHold:
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        break;
-                    case Status.Completed:
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        break;
-                    case Status.Deleted:
-                        Console.ForegroundColor = ConsoleColor.Magenta;
-                        break;
-                    default:
-                        break;
-                }
-                Console.WriteLine(todo.Description);
-            }
-        }
-    }
-
-    class Todo
-    {
-        public string Description { get; set; }
-        public int EstimatedHours { get; set; }
-        public Status Status { get; set; }
-    }
-
-    enum Status
-    {
-        NotStarted,
-        InProgress,
-        OnHold,
-        Completed,
-        Deleted
     }
 }
